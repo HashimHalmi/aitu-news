@@ -1,0 +1,37 @@
+{{ template  "base" .}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Approval</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+<header>
+    <!-- Add your header content here -->
+</header>
+{{define "main"}}
+<main>
+    <h1>Pending Teacher Approval</h1>
+    <ul>
+        {{if .PendingTeachers}}
+        {{range .PendingTeachers }}
+        <li>
+            <span>Name: {{ .Name }}</span>
+            <span>Email: {{ .Email }}</span>
+            <span><a href="/admin/approve/{{ .ID }}">Approve</a></span>
+        </li>
+        {{ else }}
+        <p>No teachers pending approval.</p>
+        {{ end }}
+        {{ end }}
+    </ul>
+</main>
+
+<footer>
+    <!-- Add your footer content here -->
+</footer>
+</body>
+</html>
+{{ end }}

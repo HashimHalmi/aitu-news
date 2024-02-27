@@ -1,0 +1,25 @@
+{{template "base" .}}
+
+{{define "title"}}Article #{{.Article.ID}}{{end}}
+
+{{define "main"}}
+    {{with .Article}}
+                                         
+    <div class='article'>
+        <div class='metadata'>
+            <strong>{{.Title}}</strong>
+            <span>#{{.ID}}</span>
+            <h1>{{.Category}}</h1>
+
+        </div>
+        <pre><code>{{.Content}}</code></pre>
+
+        <div class='metadata'>
+            <!-- Use the new template function here -->
+            <time>Created: {{humanDate .Created}}</time>
+            <time>Expires: {{humanDate .Expires}}</time>
+
+        </div>
+    </div>
+    {{end}}
+{{end}}

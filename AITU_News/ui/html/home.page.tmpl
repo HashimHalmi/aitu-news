@@ -1,0 +1,28 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "main"}}
+    <h2>Latest Articles</h2>
+    {{if .Articles}}
+     <table>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>ID</th>
+            <th>Category</th>
+        </tr>
+        {{range .Articles}}
+        <tr>
+            <td><a href='/article/{{.ID}}'>{{.Title}}</a></td>
+            <!-- Use the new template function here -->
+            <td>{{humanDate .Created}}</td>
+            <td>#{{.ID}}</td>
+            <td>{{.Category}}</td>
+        </tr>
+        {{end}}
+    </table>
+    {{else}}
+        <p>There's nothing to see here... yet!</p>
+    {{end}}
+{{end}}

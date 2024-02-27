@@ -1,0 +1,49 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>{{template "title" .}} - AITU News</title>
+        <!-- Link to the CSS stylesheet and favicon -->
+        <link rel='stylesheet' href='/static/css/main.css'>
+        <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon'>
+        <!-- Also link to some fonts hosted by Google -->
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Exo+2&display=swap'>
+    </head>
+    <body>
+        <header>
+            <h1><a href='/'>AITU News</a></h1>
+        </header>
+        <nav>
+            <a href='/'>Home</a>
+            {{if .IsAuthenticated}}
+            <a href='/article/create'>Create article</a>
+            {{end}}
+            <a href='/contacts'>Contact Us</a>
+            <!-- Add dynamic links for each category -->
+            {{range .Categories}}
+            <a href='/category/{{.}}'>{{.}}</a>
+            {{end}}
+
+            {{if .IsAuthenticated}}
+                <form action='/user/logout' method='POST'>
+                    <button>Logout</button>
+                </form>
+            {{else}}
+                <a href='/user/signup'>Signup</a>
+                <a href='/user/login'>Login</a>
+            {{end}}
+
+
+        </nav>
+        <main>
+            {{with .Flash}}
+            <div class='flash'>{{.}}</div>
+            {{end}}
+            {{template "main" .}}
+        </main>
+        {{template "footer" .}}
+        <script src="/static/js/main.js" type="text/javascript"></script>
+    </body>
+</html>
+{{end}}
